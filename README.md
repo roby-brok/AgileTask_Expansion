@@ -23,7 +23,8 @@ AgileTask_Expansion/
 ├── docs/
 │   ├── BACKLOG.md       # Product Backlog
 │   ├── DOD.md           # Team Definition of Done
-│   └── RATIONALE.md     # Why we took our design decisions
+│   ├── RATIONALE.md     # Why we took our design decisions
+│   └── REFLECTION.md    # Sprint Zero review answers
 ├── tests/
 │   ├── __init__.py
 │   └── test_logic.py    # Unit tests
@@ -40,3 +41,7 @@ From the repo folder run:
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+## Progression
+
+`SETUP` (roles/repo) → `ADD` (DoD) → `UPDATE` (estimated backlog) → `REFACTOR` (spike / Boy Scout Rule) → `REFLECT`
