@@ -19,7 +19,7 @@ In this repo we plan and start the expansion of AgileTask, our simple task manag
 AgileTask_Expansion/
 ├── app/
 │   ├── __init__.py
-│   └── logic.py         # Task and TaskManager (the existing system)
+│   └── logic.py         # Task, TaskManager and the Notifier classes
 ├── docs/
 │   ├── BACKLOG.md       # Product Backlog
 │   ├── DOD.md           # Team Definition of Done

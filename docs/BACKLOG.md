@@ -11,9 +11,13 @@ The PO decides **what** is most important. The Developers decide **how much** ea
 | 1 | US-01 | Categorise tasks | 3 |
 | 2 | US-02 | Set a due date on a task | 2 (reference) |
 | 3 | US-03 | Filter tasks by category and status | 5 |
-| | | **Total** | **10** |
+| 4 | SP-01 | **Technical Spike:** notification support | Timeboxed, 1 day (no points) |
+| 5 | US-04 | Real-time task notifications | Not estimated yet (about 5 after SP-01) |
+| | | **Total (estimated stories)** | **10** |
 
 **Reference story:** US-02 (2 points). It is the smallest and clearest story, so we compared all the others with it. The reasons for the order are in `docs/RATIONALE.md` (RD-002).
+
+US-04 is not in the total because it doesn't have a real estimate yet. We will confirm it in the next Planning Game.
 
 ---
 
@@ -47,3 +51,27 @@ The PO decides **what** is most important. The Developers decide **how much** ea
 * I can use both filters together, for example Work + Open shows only the open Work tasks.
 * If no task matches, I see "No tasks match your filters" and not an empty screen.
 * When I clear the filters, I see all my tasks again.
+
+---
+
+## SP-01: Technical Spike for Notification Support
+**Type:** Technical Spike. It is research and a small prototype, not a feature for the user.
+**Timebox:** 1 day. A spike doesn't get story points, because what it gives us is knowledge, not working features.
+**Why we need it:** The customer wants real-time notifications (US-04), but we couldn't estimate it. In the old code `complete_task()` prints the log line and the email line directly inside the method. That design is Rigid: every new channel means changing `TaskManager` again. We didn't know how much work it would be to change this safely.
+**Question to answer:** Can we add a new notification channel without touching `TaskManager`, and without breaking the log and email messages we already have?
+**Status:** Done in Sprint Zero.
+**Result:**
+* `complete_task()` now uses a `Notifier` interface (Open-Closed Principle). The details are in RD-003.
+* A test adds a new `PushNotifier` without any change to `TaskManager`, so a new channel is just a new class.
+* A test checks that the old `[LOG]` and `[EMAIL]` output is exactly the same as before.
+* Now the team thinks US-04 is about **5 points**. The hard part is not the code in `TaskManager` any more, but the real push service and the user settings.
+
+## US-04: Real-Time Task Notifications
+**Story:** As a user, I want to get a notification straight away when a task is completed, so that I know about progress without opening the app all the time.
+**Estimate:** Not estimated yet. After SP-01 our first guess is about 5 points, to confirm at the next Planning Game.
+**Justification:** We couldn't estimate it before the spike because we didn't know how rigid the code was. Now we know the change in `TaskManager` is small, but connecting a real push service and adding the settings is still more work and more risk than US-01.
+**Acceptance Criteria (draft, to refine with the PO):**
+* When a task is completed, I get a push notification within 5 seconds.
+* The notification shows the title of the task.
+* If I switch push notifications off in my settings, I don't get any.
+* The log message and the email message still work as before.
