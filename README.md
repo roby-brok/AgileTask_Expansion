@@ -21,7 +21,9 @@ AgileTask_Expansion/
 │   ├── __init__.py
 │   └── logic.py         # Task and TaskManager (the existing system)
 ├── docs/
-│   └── BACKLOG.md       # Product Backlog
+│   ├── BACKLOG.md       # Product Backlog
+│   ├── DOD.md           # Team Definition of Done
+│   └── RATIONALE.md     # Why we took our design decisions
 ├── tests/
 │   ├── __init__.py
 │   └── test_logic.py    # Unit tests
